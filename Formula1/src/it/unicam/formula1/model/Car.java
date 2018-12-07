@@ -7,9 +7,10 @@ public class Car implements Movable {
 	private Point2D inertiaVector;
 	private CarType team;
 	
-	Car(CarType team,Point2D startingGrid){
+	Car(CarType team,Point2D startingPosition){
 		this.team=team;
 		this.inertiaVector.setLocation(0.0, 0.0);
+		this.actualPosition.setLocation(startingPosition);
 	}
 	
 	@Override
@@ -24,6 +25,7 @@ public class Car implements Movable {
 	}
 	public void setNewPosition() {		
 		actualPosition.setLocation(actualPosition.getX()+this.inertiaVector.getX(),actualPosition.getY()+inertiaVector.getY());
+		
 	}
 
 	public String getTeamColor() {

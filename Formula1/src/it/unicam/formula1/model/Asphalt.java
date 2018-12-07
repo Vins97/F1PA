@@ -17,7 +17,7 @@ public class Asphalt {
 		this();
 		this.coordinates.setLocation(coords);
 	}
-	//vedere se una data macchina puÃ² trovarsi in quel punto o meno
+	//vedere se una data macchina puó trovarsi in quel punto o meno
 	public void setBusy (Car occuper){
 		if(!isAlreadyBusy) {
 			this.isAlreadyBusy=true;
