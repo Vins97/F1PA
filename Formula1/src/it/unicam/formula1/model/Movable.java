@@ -1,8 +1,9 @@
 package it.unicam.formula1.model;
-import java.awt.geom.Point2D;
+import java.awt.Point;
+
 
 public interface Movable {
-	Point2D getActualPosition();
-	Point2D updateInertia(Point2D choosenMove);
+	Point getActualPosition();
+	Point updateInertia(Moves choosenMove);
 	
 }	

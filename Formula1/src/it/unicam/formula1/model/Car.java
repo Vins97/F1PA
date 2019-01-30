@@ -1,35 +1,36 @@
 package it.unicam.formula1.model;
-import java.awt.geom.Point2D;
-import java.util.HashMap;
+import java.awt.Point;
+
 
 public class Car implements Movable {
-	private Point2D actualPosition;
-	private Point2D inertiaVector;
+	private Point actualPos;
+	private Point inertiaVec;
 	private CarType team;
 	
-	Car(CarType team,Point2D startingPosition){
+	Car(CarType team,Point strPosition){
 		this.team=team;
-		this.inertiaVector.setLocation(0.0, 0.0);
-		this.actualPosition.setLocation(startingPosition);
+		this.inertiaVec.setLocation(0,0);
+		this.actualPos.setLocation(strPosition);
 	}
 	
 	@Override
-	public Point2D getActualPosition() {
-		return actualPosition;
+	public Point getActualPosition() {
+		return actualPos;
 	}
-	//si potrebbe fare con iterator pattern
 	@Override
-	public Point2D updateInertia(Point2D choosenMove) {		
-		inertiaVector.setLocation(choosenMove.getX()+inertiaVector.getX(),choosenMove.getY()+inertiaVector.getY());
-		return 	inertiaVector;
+	public Point updateInertia(Moves choosenMove) {		
+		inertiaVec.setLocation(inertiaVec.getX()+choosenMove.getMoves().getX() ,inertiaVec.getY()+choosenMove.getMoves().getY());
+		return 	inertiaVec;
 	}
+	
 	public void setNewPosition() {		
-		actualPosition.setLocation(actualPosition.getX()+this.inertiaVector.getX(),actualPosition.getY()+inertiaVector.getY());
-		
+		actualPos.setLocation(actualPos.getX()+inertiaVec.getX(), actualPos.getY()+inertiaVec.getY());		
 	}
 
 	public String getTeamColor() {
 		return team.getColor();
 	}
-		
+	
+
+
 }

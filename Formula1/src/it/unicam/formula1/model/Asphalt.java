@@ -1,42 +1,32 @@
 package it.unicam.formula1.model;
 
-import java.awt.geom.Point2D;
+import java.awt.Point;
 
-public class Asphalt {
-	private boolean isAlreadyBusy;
-	private Car occupiedSpace;
-	private Point2D coordinates;
+public class Asphalt{
+	private boolean isBusy;
+	private Point coordinates;
+	
 	public Asphalt() {
-		this.isAlreadyBusy = false;
+		this.isBusy = false;
 	}
-	public Asphalt(double x,double y) {
+	public Asphalt(int x,int y) {
 		this();
-		this.coordinates.setLocation(x, y);
+		this.coordinates = new Point(x,y);
 	}
-	public Asphalt(Point2D coords) {
+	public Asphalt(Point coords) {
 		this();
-		this.coordinates.setLocation(coords);
+		this.coordinates = new Point(coords);
 	}
 	//vedere se una data macchina puó trovarsi in quel punto o meno
-	public void setBusy (Car occuper){
-		if(!isAlreadyBusy) {
-			this.isAlreadyBusy=true;
-			this.occupiedSpace=occuper;
-		}
-			
-	}
-	public void setFree () {
-		if(isAlreadyBusy) {
-			this.isAlreadyBusy=false;		
-			this.occupiedSpace=null;
-		}
-	}
-	public boolean getStatusBusy() {
-		return isAlreadyBusy;
-	}
-	public Point2D getCoordinates() {
-		return coordinates;
+	public void changeState () {
+		this.isBusy=!this.isBusy;
 	}
 	
+	public boolean getState() {
+		return isBusy;
+	}
+	public Point getCoordinates() {
+		return coordinates;
+	}
 	
 }

@@ -1,10 +1,11 @@
-import it.unicam.formula1.*;
-import it.unicam.formula1.model.Car;
+
+
+import it.unicam.formula1.model.*;
 
 public class Main {
 
 	public static void main(String[] args) {
-	
+		
 
 	}
 
