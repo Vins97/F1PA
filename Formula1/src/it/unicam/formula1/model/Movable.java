@@ -4,6 +4,5 @@ import java.awt.Point;
 
 public interface Movable {
 	Point getActualPosition();
-	Point updateInertia(Moves choosenMove);
-	
+	boolean makeAcceleration(Moves m);	
 }	
