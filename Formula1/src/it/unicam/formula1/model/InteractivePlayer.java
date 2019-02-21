@@ -30,8 +30,8 @@ public class InteractivePlayer implements Player {
 	//fa la mossa in modo da modificare la posizione sul tracciato e se ricava un errore ha perso
 	@Override
 	public Moves nextMove() {
-		while()
-		return Moves.E;
+		
+		return this.nextMoves;
 	}
 	@Override
 	public String toString() {
@@ -56,6 +56,7 @@ public class InteractivePlayer implements Player {
 	}
 	
 	public void setNextMove(Moves m) {
+		this.setNextMove(m);
 		
 	}
 	

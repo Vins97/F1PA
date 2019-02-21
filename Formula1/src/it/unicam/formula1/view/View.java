@@ -35,15 +35,15 @@ public class View extends JPanel{
 	
 	private JPanel btnContainer = new JPanel();
 	
-	private JButton  SW;
-	private JButton  S ;
-	private JButton  SE ;
-	private JButton  W ;
-	private JButton  NEUTRAL;
-	private JButton  E;
-	private JButton  NW;
-	private JButton  N;
-	private JButton  NE;
+	private JButton  SW = new JButton("o");
+	private JButton  S = new JButton("o");
+	private JButton  SE = new JButton("o");
+	private JButton  W = new JButton("o");
+	private JButton  NEUTRAL= new JButton("o");
+	private JButton  E= new JButton("o");
+	private JButton  NW= new JButton("o");
+	private JButton  N= new JButton("o");
+	private JButton  NE= new JButton("o");
 	
 	
 	private JFrame f = new JFrame();
@@ -75,21 +75,8 @@ public class View extends JPanel{
 			f.setLocationRelativeTo(this);
 			f.setVisible(true);
 	}
-	private void buttonGenerator() {
-		for(Moves m: Moves.values()) {
-			JButton button = new JButton(m.toString());
-			btnContainer.add(button);
-			button.addActionListener(new ActionListener() {				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					race.getCurrentPlayer().
-					
-				}
-			});
-	
-		}
 		
-	}
+	
 	
 
 

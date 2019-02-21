@@ -23,12 +23,7 @@ class ViewTest {
 	@Test
 	void testView() {
 		View v = new View(new Race(1));
-		JFrame frame = new JFrame("Points");
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.add(v);
-	    frame.setSize(1280,720);
-	    frame.setLocationRelativeTo(null);
-	    frame.setVisible(true);
-	}
+		}
+	
 
 }
