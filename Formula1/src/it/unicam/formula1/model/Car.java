@@ -1,41 +1,66 @@
 package it.unicam.formula1.model;
+import java.awt.Color;
 import java.awt.Point;
 
 
-public class Car implements Movable {
-	private Point actualPos;
+
+public class Car  {
+	private int id;
+	private final int NUMBER_OF_CHECKPOINT = 4;
 	private Point inertiaVec;
+	private boolean[] checkPass = new boolean[NUMBER_OF_CHECKPOINT];
 	private CarType team;
-	Car(CarType team,Point strPosition){
+	public Car(CarType team,int id){
 		this.team=team;
-		this.inertiaVec.setLocation(0,0);
-		this.actualPos.setLocation(strPosition);
+		this.id=id;
+		this.inertiaVec = new Point(0,0);
 	}
-	
-	@Override
-	public Point getActualPosition() {
-		return actualPos;
-	}
-	@Override
-	public boolean makeAcceleration(Moves choosenMove) {		
+	public void makeAcceleration(Moves choosenMove) {		
 		inertiaVec.setLocation(inertiaVec.getX()+choosenMove.getMoves().getX() ,inertiaVec.getY()+choosenMove.getMoves().getY());
-		
-		return true;
 	}
 	
-	public void setNewPosition() {		
-		actualPos.setLocation(actualPos.getX()+inertiaVec.getX(), actualPos.getY()+inertiaVec.getY());		
-	}
-	
-	public String getTeamColor() {
+	public Color getTeamColor() {
 		return team.getColor();
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return "Team: "+team.toString();
+		return "Team: "+this.team.toString()+" Id: "+this.id;
 	}
+
+	@Override
+	public boolean equals(Object o) {		
+		if(o instanceof Car) {
+			Car piece = (Car)o;
+			return (this.getId()==piece.getId());		
+		}
+		return false;
+	}
+	
+	public void addCheckPassed(int id) {
+		this.checkPass[id]= true;
+	}
+	
+	public boolean[] getCheckPassed() {
+		return this.checkPass;
+	}
+	
+	public boolean isAllChecked() {
+		for(boolean b : checkPass) {
+			if(!b) return false;
+		}
+		return true;
+	}
+	
+	public Point getInertia() {
+		return inertiaVec;
+	}
+
+	public int getId() {
+		return id;
+	}
+	
+
 	
 	
 

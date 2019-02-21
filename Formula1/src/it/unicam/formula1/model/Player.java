@@ -3,16 +3,20 @@
  */
 package it.unicam.formula1.model;
 
-import java.awt.Point;
 
 /**
  * @author Vincenzo Chiarella 31 gen 2019
  *
  */
-public interface Player {
-	void startRace();
-	void startChoose(String name,CarType car);
-	Point nextMove(Moves move);
-	void youWin();
-	void youLoose();
+public interface Player extends Comparable<Player> {
+	Car getCar();
+	Moves nextMove();
+	Double getDistanceToRun();
+	void setDistanceToRun(double d);
+	default String youFinish() {
+		return this.toString()+"Congrats! You finish";
+	};
+	default String youLoose() {
+		return this.toString()+"You have made a mistake. Start a new race!";
+	};
 }

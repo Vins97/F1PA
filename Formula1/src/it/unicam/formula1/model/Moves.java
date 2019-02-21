@@ -15,9 +15,10 @@ public enum Moves {
 	SE(1,-1),
 	E(1,0),
 	NE(1,1),
-	N(1,0),
-	NW(1,-1),
-	W(-1,0);
+	N(0,1),
+	NW(-1,1),
+	W(-1,0),
+	NEUTRAL(0,0);
 	private int x;
 	private int y;
 	Moves(int x,int y){

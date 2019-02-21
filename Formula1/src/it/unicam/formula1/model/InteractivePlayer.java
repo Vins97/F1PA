@@ -3,7 +3,8 @@
  */
 package it.unicam.formula1.model;
 
-import java.awt.Point;
+
+
 
 /**
  * @author Vincenzo Chiarella 31 gen 2019
@@ -11,65 +12,53 @@ import java.awt.Point;
  */
 public class InteractivePlayer implements Player {
 	private Car car;
-	private int checkPointPassed;
 	private String name;
+	private int id;
+	private double distToRun;
 	
-	public InteractivePlayer(Car car, String name) {
-		this.car = car;
-		this.checkPointPassed =0;
-		this.name = name;
+	private Moves nextMoves;
+	
+	public InteractivePlayer(CarType ct,String n,int id) {
+		this.car= new Car(ct,id);
+		this.name=n;
+		this.id=id;
 	}
-
-	/* (non-Javadoc)
-	 * @see it.unicam.formula1.model.Player#startRace()
-	 */
 	@Override
-	public void startRace() {
-		// TODO Auto-generated method stub
-		
+	public Car getCar() {
+		return this.car;
 	}
-
-	/* (non-Javadoc)
-	 * @see it.unicam.formula1.model.Player#startChoose(java.lang.String, it.unicam.formula1.model.CarType)
-	 */
+	//fa la mossa in modo da modificare la posizione sul tracciato e se ricava un errore ha perso
 	@Override
-	public void startChoose(String name, CarType car) {
-		// TODO Auto-generated method stub
-		
+	public Moves nextMove() {
+		while()
+		return Moves.E;
 	}
-
-	/* (non-Javadoc)
-	 * @see it.unicam.formula1.model.Player#nextMove(it.unicam.formula1.model.Moves)
-	 */
-	@Override
-	public Point nextMove(Moves move) {
-		// TODO Auto-generated method stub
-		return move.getMoves();
-	}
-
-	/* (non-Javadoc)
-	 * @see it.unicam.formula1.model.Player#youWin()
-	 */
-	@Override
-	public void youWin() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see it.unicam.formula1.model.Player#youLoose()
-	 */
-	@Override
-	public void youLoose() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return "Player name: " + this.name +", Car chooesen: "+this.car+" ";
+		return this.name;
 	}
+	/* (non-Javadoc)
+	 * @see it.unicam.formula1.model.Player#getDistanceToRun()
+	 */
+	@Override
+	public Double getDistanceToRun() {		
+		return distToRun;
+	}
+	@Override
+	public void setDistanceToRun(double d) {
+		this.distToRun=d;		
+	}
+	@Override
+	public int compareTo(Player o) {
+	        if(this.getDistanceToRun() < o.getDistanceToRun()) return -1;
+	        else if(this.getDistanceToRun() > o.getDistanceToRun()) return 1;
+	        else return 0;	
+	}
+	
+	public void setNextMove(Moves m) {
+		
+	}
+	
 	
 	
 
