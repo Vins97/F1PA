@@ -41,7 +41,13 @@ public class Track {
 			if(!this.trk.containsAll(cp.getLine()))
 				throw new DataInputException();
 		}
+	}	
+	//controlla se l'auto compiendo lo spostamento attraversa caselle fuori dal tracciato
+	private boolean checkLines(ArrayList<Asphalt> as) {
+		return this.trk.containsAll(as);
 	}
+	
+	
 	//controlla che se e che id abbia il checkpoint dato il vettore di spostamento dell'auto
 	private Vector<Integer> matchCheckPoint(ArrayList<Asphalt> a) {			
 		Vector<Integer> iDS= new Vector<>();
@@ -53,10 +59,7 @@ public class Track {
 		}
 		return iDS;
 	}
-	//controlla se l'auto compiendo lo spostamento attraversa caselle fuori dal tracciato
-	private boolean checkLines(ArrayList<Asphalt> as) {
-		return this.trk.containsAll(as);
-	}
+
 	
 	//controlla se l'asfalto e' sul tracciato
 	public boolean isAsphaltOnTrack(Asphalt p) {

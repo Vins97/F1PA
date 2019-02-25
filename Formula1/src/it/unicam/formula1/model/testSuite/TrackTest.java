@@ -17,7 +17,7 @@ import it.unicam.formula1.model.CarType;
 import it.unicam.formula1.model.Moves;
 import it.unicam.formula1.model.Track;
 import it.unicam.formula1.model.exception.DataInputException;
-import it.unicam.formula1.model.exception.PlayerErrorException;
+
 
 /**
  * @author Vincenzo Chiarella 30 gen 2019
@@ -98,7 +98,7 @@ class TrackTest {
 		//System.out.println(trDf.getCarPosition(c1));		
 	}
 	@Test 
-	void movementT1() throws DataInputException,PlayerErrorException{
+	void movementT1() throws DataInputException{
 		Track trDf = new Track();
 		Car c1= new Car(CarType.FERRARI,5);
 		trDf.setCarOnTrack(c1,0,1);
@@ -113,7 +113,7 @@ class TrackTest {
 		
 	}
 	@Test
-	void testGetTotalDistanceToRun() throws DataInputException,PlayerErrorException{
+	void testGetTotalDistanceToRun() throws DataInputException{
 		Track trDf = new Track();
 		Car c1= new Car(CarType.FERRARI,5);
 		trDf.setCarOnTrack(c1,0,1);
