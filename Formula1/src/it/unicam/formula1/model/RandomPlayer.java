@@ -12,13 +12,13 @@ public class RandomPlayer implements Player {
 	private Car car;
 	private String name;
 	private int id;
-	private int position;
 	private double distToRun;
+	private boolean isInGame=true;
 	public RandomPlayer(CarType ct,String n,int id) {
 		this.car= new Car(ct,id);
 		this.name="Player"+id;
 		this.id=id;
-		this.position=0;
+		this.distToRun=1000;
 	}
 
 	@Override
@@ -33,20 +33,13 @@ public class RandomPlayer implements Player {
 
 	@Override
 	public String toString() {
-		return this.name+" as "+this.position;
+		return this.name;
 	}
 
-	/* (non-Javadoc)
-	 * @see it.unicam.formula1.model.Player#getDistanceToRun()
-	 */
 	@Override
 	public Double getDistanceToRun() {
-		return this.getDistanceToRun();
+		return this.distToRun;
 	}
-
-	/* (non-Javadoc)
-	 * @see it.unicam.formula1.model.Player#setDistanceToRun(double)
-	 */
 	@Override
 	public void setDistanceToRun(double d) {
 		this.distToRun=d;
@@ -58,5 +51,23 @@ public class RandomPlayer implements Player {
 	        if(this.getDistanceToRun() < o.getDistanceToRun()) return -1;
 	        else if(this.getDistanceToRun() > o.getDistanceToRun()) return 1;
 	        else return 0;	
+	}
+
+	/* (non-Javadoc)
+	 * @see it.unicam.formula1.model.Player#getId()
+	 */
+	@Override
+	public int getId() {
+		return this.id;
+	}
+
+	@Override
+	public void setIsInGame(boolean s) {
+		this.isInGame=s;		
+	}
+
+	@Override
+	public boolean getIsInGame() {
+		return isInGame;
 	}
 }

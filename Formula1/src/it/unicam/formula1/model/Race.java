@@ -7,9 +7,10 @@ package it.unicam.formula1.model;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import it.unicam.formula1.model.exception.DataInputException;
-import it.unicam.formula1.model.exception.PlayerErrorException;
+
 
 
 
@@ -18,41 +19,40 @@ import it.unicam.formula1.model.exception.PlayerErrorException;
  *
  */
 public class Race {
-	private static final int numRacer=4;
+	private final int numRacer=4;
 	private Track trackChoosen;
 	private Player[] racer = new Player[numRacer];
-	private ArrayList<Player> leaderBoard;
-	private int interactivePlayer;
+	private List<InteractivePlayer> interactiveList;
+
+	private List<Player> leaderBoard;
+
 	private int currentPlayer = 0;
-	public Race(int interactivePlayer) {
+
+	//TODO da aggiungere il tracciato al costruttore
+	public Race(List<InteractivePlayer> listPlayer) {
 		try {
-		this.trackChoosen= new Track();
-		this.leaderBoard= new ArrayList<>();
-		this.start();
+			this.trackChoosen= new Track();
+			this.leaderBoard= new ArrayList<>();
+			this.interactiveList = new ArrayList<>(listPlayer);
+			addInteractivePlayer();
+			fillRandomBot();
+			initCarPosition();
 		}catch(DataInputException e){
-			
+
 		}
 	}
 	public Race(Track trackChoosen){
 		super();
 		this.trackChoosen = trackChoosen;
 		this.initCarPosition();
-	}
+	}	
 	//usare una player factory (Factory Method)
-	public void addPlayer(CarType c,String nome,int id) {		
-		PlayerFactory pf = new PlayerFactory();
-		for(int i=0;i<numRacer;i++) {
-			if(racer[i]==null) {
-				racer[i] = pf.getPlayer("itr", c, nome, id);
-				break;
-			}	
+	public void addInteractivePlayer() {		
+		for(int i=0;i<this.interactiveList.size();i++) {
+			racer[i] = this.interactiveList.get(i);
 		}
 	}
-	public void controlAddPlayer() {
-		
-		
-	}
-	public void addRandomPlayer() {
+	public void fillRandomBot() {
 		PlayerFactory pf = new PlayerFactory();
 		for(int i=0;i<numRacer;i++) {
 			if(racer[i]==null)
@@ -60,6 +60,8 @@ public class Race {
 		}
 
 	}
+
+
 	private void initCarPosition() {
 		int pos=0;
 		//sublist to get first 4 position 
@@ -67,53 +69,62 @@ public class Race {
 			trackChoosen.setCarOnTrack(racer[pos].getCar(), as.x, as.y);
 			pos++;
 		}
-		
-	}
-//	//
-//	public Player nextPlayer(int prevId) {
-//		return racer[(prevId+1)%numRacer];		
-//	}
 
-	public void start() {
-		for(int i=0;i<this.interactivePlayer;i++) {
-			controlAddPlayer();
-		}
-		addRandomPlayer();		
-		initCarPosition();		
-	//	this.updateLeaderboard();
-		//while(doMoves());
 	}
-	//TODO da correggere perche' quando un giocatore va fuori pista non si ferma la gara
-	public boolean doMoves() {
-		try {
-			Moves m = this.racer[this.currentPlayer].nextMove();
-			this.trackChoosen.moveCar(this.racer[this.currentPlayer].getCar(),m);
-			updateLeaderboard();
-			if(this.racer[this.currentPlayer].getCar().isAllChecked()) return false;
+
+	public void moveInteractiveCar() {
+
+	}
+	public void mainGameLoop() {
+
+
+		updateLeaderboard();
+		while(doMoves());
+	}
+	public boolean doMoves() {			
+		if(getCurrentPlayer().getIsInGame()) {
+			boolean c=true;
+			Moves m = getCurrentPlayer().nextMove();
+			this.trackChoosen.moveCar(getCurrentPlayer().getCar(),m);
+			//updateLeaderboard();
+			System.out.println(getCurrentPlayer().toString() + m);
+			c=checkForWinner(this.currentPlayer);
 			changePlayer();
-		}catch(PlayerErrorException e) {
-			
+			return !c;
 		}
-	
-		return true;
+		changePlayer();
+		return true;			
 	}
+	private boolean checkForWinner(int p) {
+		if(this.racer[p].getCar().isAllChecked())
+			return true;
+		else 
+			return false;		
+	}
+
 	private void changePlayer() {
 		this.currentPlayer= (currentPlayer+1)%numRacer;
 	}
 	private void updateLeaderboard() {
-		ArrayList<Player> tempLead = new ArrayList<>();
-		for(int i=0;i<numRacer;i++) {		
-			racer[i].setDistanceToRun(this.trackChoosen.getTotalDistanceToRun(racer[i].getCar()));
-			tempLead.add(racer[i]);			
+		List<Player> tempLead = new ArrayList<>();
+		for(int i=0;i<numRacer;i++) {
+			if(racer[i].getIsInGame()) {
+				racer[i].setDistanceToRun(this.trackChoosen.getTotalDistanceToRun(racer[i].getCar()));
+				tempLead.add(racer[i]);
+			}			
 		}
 		Collections.sort(tempLead);
 		this.leaderBoard=tempLead;		
+	}
+
+	public List<Player> getLeaderBoard(){
+		return this.leaderBoard;
 	}
 	//serve per il controller
 	public Player getCurrentPlayer() {
 		return this.racer[this.currentPlayer];
 	}
-	
+
 	public Track getTrackChoosen() {
 		return this.trackChoosen;
 	}

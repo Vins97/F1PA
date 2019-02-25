@@ -5,12 +5,10 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 
 import it.unicam.formula1.model.exception.DataInputException;
-import it.unicam.formula1.model.exception.PlayerErrorException;
 
 
 
@@ -29,11 +27,11 @@ public class Track {
 	//inizializza un tracciato diritto 
 	public Track() throws DataInputException{
 		this.trk = new ArrayList<>();
-		this.trackGenerator();
+		trackGenerator();
 		this.strGrid = initLines(0,0);
-		this.initCPLines();
-		this.putCheckPointOnTrack();
-		this.checkInputData();
+		initCPLines();
+		putCheckPointOnTrack();
+		checkInputData();
 	}
 	//controlla se i check point e la linea iniziale siano all'interno del tracciato
 	private void checkInputData() throws DataInputException{
@@ -89,12 +87,14 @@ public class Track {
 	}
 	//posiziona una macchiana su un determinato punto
 	public boolean setCarOnTrack(Car c,int x,int y) {
-		if(isAsphaltOnTrack(x, y)) return this.getAsphalt(x, y).setCar(c);			
+		if(isAsphaltOnTrack(x, y)) {
+			c.setOnTrack(true);
+			return this.getAsphalt(x, y).setCar(c);
+			}			
 		else return false;		
 	}
 	
 	//restituisce gli oggetti Asphalt del tracciato che corrispondono al vettore di asphalto
-	
 	public ArrayList<Asphalt> getAsphaltArray(ArrayList<Asphalt> asLs){
 		ArrayList<Asphalt> ss = new ArrayList<>();
 		for(Asphalt a : asLs) {
@@ -134,21 +134,33 @@ public class Track {
 				.collect(Collectors.toCollection(ArrayList::new));
 		return position;
 	}
+	
+	
 	//sposta una macchina da una posizione all'altra
-	public void moveCar(Car c,Moves choosenMove) throws PlayerErrorException {
+	public void moveCar(Car c,Moves choosenMove) {
 		c.makeAcceleration(choosenMove);
 		Asphalt actual = getAsphalt(c);
-		Asphalt next = getAsphalt(actual.x+c.getInertia().x,actual.y+c.getInertia().y);
+		Asphalt next = getAsphalt(actual.x+c.getInertia().x,actual.y+c.getInertia().y);		
 			ArrayList<Asphalt> vector = new ArrayList<>();
 			vector = BresenhamAlgorithm.findLine(actual.getLocation(),next.getLocation());
 			vector = this.getAsphaltArray(vector);
-			if(!this.checkLines(vector)) throw new PlayerErrorException();
+			
+			if(!this.checkLines(vector)) {
+				actual.setEmpty();
+				next.setEmpty();
+				c.setOnTrack(false);
+			}				
 			Vector<Integer> ids = this.matchCheckPoint(vector);
 			for(Integer i:ids) { 
 				c.addCheckPassed(i);
 			}
-		actual.setEmpty();
-		next.setCar(c);		
+		if(next.isEmpty()) {
+			actual.setEmpty();
+			next.setCar(c);
+		}else{	
+			actual.setEmpty();
+			c.setOnTrack(false);			
+			}
 	}
 	
 	public double getDistance(Point p1,Point p2) {
@@ -177,13 +189,16 @@ public class Track {
 				}
 			}
 		}
-		return totDist;
-		
+		return totDist;		
 	}
 	
 	public void printAsphaltList(List<Asphalt> list) {
 		list.forEach(System.out::println);
 	}
+	
+	
+	
+	
 	//for JUnitTest
 	public ArrayList<Asphalt> getTrack() {
 		return trk;

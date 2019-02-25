@@ -10,6 +10,7 @@ public class Car  {
 	private Point inertiaVec;
 	private boolean[] checkPass = new boolean[NUMBER_OF_CHECKPOINT];
 	private CarType team;
+	private boolean isOnTrack;
 	public Car(CarType team,int id){
 		this.team=team;
 		this.id=id;
@@ -58,6 +59,12 @@ public class Car  {
 
 	public int getId() {
 		return id;
+	}
+	public boolean isOnTrack() {
+		return isOnTrack;
+	}
+	public void setOnTrack(boolean isOnTrack) {
+		this.isOnTrack = isOnTrack;
 	}
 	
 

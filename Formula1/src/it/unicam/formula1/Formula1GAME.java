@@ -5,9 +5,8 @@ package it.unicam.formula1;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 
-import it.unicam.formula1.view.MainPanel;
+import it.unicam.formula1.view.SettingPanel;
 
 
 /**
@@ -22,12 +21,7 @@ public class Formula1GAME implements Runnable{
 	}
 	@Override
 	public void run() {
-		  JFrame f = new JFrame("Formula1 Unicam PA");
-	        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        f.add(new MainPanel());
-	        f.setSize(1280, 720);
-	        f.setLocationRelativeTo(null);
-	        f.setVisible(true);
+		new SettingPanel();
 		
 	}
 

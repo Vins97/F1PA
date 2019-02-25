@@ -3,12 +3,15 @@
  */
 package it.unicam.formula1.model.testSuite;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Test;
+
 
 import it.unicam.formula1.model.BresenhamAlgorithm;
 

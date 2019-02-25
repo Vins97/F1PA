@@ -5,18 +5,21 @@ package it.unicam.formula1.view;
 
 
 
-import java.awt.Graphics;
 
-import javax.swing.JPanel;
+import java.util.List;
+
+import javax.swing.JFrame;
+
 
 import it.unicam.formula1.controller.Control;
+import it.unicam.formula1.model.InteractivePlayer;
 import it.unicam.formula1.model.Race;
 
 /**
  * @author Vincenzo Chiarella 12 feb 2019
  *
  */
-public class MainPanel extends JPanel{
+public class MainPanel extends JFrame{
 	/**
 	 * 
 	 */
@@ -26,16 +29,15 @@ public class MainPanel extends JPanel{
 	private Control control;
 	
 	
-	public MainPanel(){  
-		this.race = new Race(1);
+	public MainPanel(List<InteractivePlayer> interactivePlayer){  
+		this.race = new Race(interactivePlayer);
 		this.view = new View(race);
-		this.control = new Control(race, view); 	
+		this.control = new Control(race, view);
+		startRace();
 	}
-	
 
-
-	public void render(Graphics g) {
-		this.repaint();
+	public void startRace() {
+		this.race.mainGameLoop();
 	}
 
 

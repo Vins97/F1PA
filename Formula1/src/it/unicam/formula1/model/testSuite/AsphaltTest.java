@@ -3,9 +3,9 @@
  */
 package it.unicam.formula1.model.testSuite;
 
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.*;
 
 import it.unicam.formula1.model.Asphalt;
 import it.unicam.formula1.model.Car;

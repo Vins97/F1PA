@@ -9,10 +9,13 @@ package it.unicam.formula1.model;
  *
  */
 public interface Player extends Comparable<Player> {
+	void setIsInGame(boolean s);
+	boolean getIsInGame();
 	Car getCar();
 	Moves nextMove();
 	Double getDistanceToRun();
 	void setDistanceToRun(double d);
+	int getId();	
 	default String youFinish() {
 		return this.toString()+"Congrats! You finish";
 	};

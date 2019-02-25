@@ -41,11 +41,11 @@ public class TrackRender extends JPanel{
     			if(!a.isIdDefalt()) {
         			g2d.setColor(Color.cyan);
         		}
-    			g2d.fillRect(a.x*MULTIPLICATION_FACTOR, a.y*MULTIPLICATION_FACTOR, MULTIPLICATION_FACTOR , MULTIPLICATION_FACTOR );
+    			g2d.fillRect(a.x*MULTIPLICATION_FACTOR,(GRIDDIMENSIONY - a.y -1)*MULTIPLICATION_FACTOR, MULTIPLICATION_FACTOR , MULTIPLICATION_FACTOR );
     		}
     		else {
     			g2d.setColor(a.getCar().getTeamColor());
-    			g2d.fillOval(a.x*MULTIPLICATION_FACTOR, a.y*MULTIPLICATION_FACTOR , MULTIPLICATION_FACTOR, MULTIPLICATION_FACTOR);
+    			g2d.fillOval(a.x*MULTIPLICATION_FACTOR,(GRIDDIMENSIONY - a.y-1)*MULTIPLICATION_FACTOR, MULTIPLICATION_FACTOR, MULTIPLICATION_FACTOR);
     		}    		
 	    }
 		g2d.setStroke(new BasicStroke(0));
