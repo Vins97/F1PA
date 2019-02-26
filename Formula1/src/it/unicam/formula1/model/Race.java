@@ -3,13 +3,13 @@
  */
 package it.unicam.formula1.model;
 
-
-
-import java.util.ArrayList;
-
 import java.util.List;
 
 import java.util.stream.Collectors;
+
+import javax.swing.JOptionPane;
+
+import jdk.nashorn.internal.runtime.regexp.joni.exception.JOniException;
 
 
 
@@ -24,13 +24,12 @@ public class Race {
 	private Track trackChoosen;
 	private Player[] racer = new Player[numRacer];
 
-	private List<Player> leaderBoard;
-
+	//private List<Player> leaderBoard;
 	private int currentPlayer = 0;
 	
 	public Race(List<InteractivePlayer> listPlayer) {
 			this.trackChoosen= new Track();
-			this.leaderBoard= new ArrayList<>();
+		//	this.leaderBoard= new ArrayList<>();
 			addInteractivePlayer(listPlayer);
 			fillRandomBot();
 			initCarPosition();	
@@ -38,7 +37,7 @@ public class Race {
 	}
 	public Race(List<InteractivePlayer> listPlayer, List<Asphalt> trackPath){	
 			this.trackChoosen= new Track(trackPath);
-			this.leaderBoard= new ArrayList<>();
+		//	this.leaderBoard= new ArrayList<>();
 			addInteractivePlayer(listPlayer);
 			fillRandomBot();
 			initCarPosition();
@@ -80,9 +79,16 @@ public class Race {
 			//updateLeaderboard();
 			System.out.println(getCurrentPlayer().toString() + m);
 			c=checkForWinner(this.currentPlayer);
-			if(c) getCurrentPlayer().youFinish();				
+			if(c) {
+				JOptionPane.showMessageDialog(null, getCurrentPlayer().youFinish(),"Congratulazioni",JOptionPane.INFORMATION_MESSAGE);
+				return false;
+				}			
 			changePlayer();
 			return !c;
+		}
+		if(allPlayerOut()) {
+			JOptionPane.showMessageDialog(null, "Fai ripartire una gara","Nessuno ha vinto",JOptionPane.INFORMATION_MESSAGE);
+			return false;
 		}
 		changePlayer();
 		return true;			
@@ -93,7 +99,13 @@ public class Race {
 		else 
 			return false;		
 	}
-
+	private boolean allPlayerOut() {
+		for(Player p : racer) {
+			if(p.getIsInGame())
+				return false;
+		}
+		return true;
+	}
 	private void changePlayer() {
 		this.currentPlayer= (currentPlayer+1)%numRacer;
 	}
@@ -113,9 +125,9 @@ public class Race {
 //		this.leaderBoard=tempLead;		
 //	}
 
-	public List<Player> getLeaderBoard(){
-		return this.leaderBoard;
-	}
+//	public List<Player> getLeaderBoard(){
+//		return this.leaderBoard;
+//	}
 	//restituisce il giocatore che sta di turno
 	public Player getCurrentPlayer() {
 		return this.racer[this.currentPlayer];

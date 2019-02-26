@@ -4,13 +4,13 @@
 package it.unicam.formula1.view;
 
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.stream.IntStream;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 
 import javax.swing.JButton;
@@ -35,7 +35,7 @@ public class ViewSetting extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -5641711571804928912L;
-	
+	private static final Dimension SCREEN_DIMENSION = Toolkit.getDefaultToolkit().getScreenSize();
 
 	private JComboBox<CarType> selectCar;
 	private JComboBox<Integer> cmbIdPlayer;
@@ -52,6 +52,10 @@ public class ViewSetting extends JFrame {
 	private JLabel countPlayerToInsert;
 	
 	private ModelSetting ms;
+	private int dialogWidth = SCREEN_DIMENSION.width / 9; //example; a quarter of the screen size
+	private int dialogHeight = SCREEN_DIMENSION.height /9; //example
+	private int dialogX = SCREEN_DIMENSION.width / 2 - dialogWidth / 2; //position right in the middle of the screen
+	private int dialogY = SCREEN_DIMENSION.height / 2 - dialogHeight / 2;
 	 
 	
 	public ViewSetting(ModelSetting ms) {
@@ -212,9 +216,9 @@ public class ViewSetting extends JFrame {
 		setDefaultCloseOperation( EXIT_ON_CLOSE );
 
 		setContentPane( pnPanel0 );
-		setSize(500,500);
 		setTitle("Seleziona impostazioni ");
 		pack();
+		setBounds(dialogX, dialogY, dialogWidth, dialogHeight);
 		setVisible( true );
 	}
 	public void addActionListenerNumPlayer(ActionListener a) {

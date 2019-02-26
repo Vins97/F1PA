@@ -5,8 +5,11 @@ package it.unicam.formula1.view;
 
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
+
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,7 +27,9 @@ public class InteractiveCommand extends JDialog{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8391474996522556716L;
+	private static final long serialVersionUID = 8391474996522556716L;	
+	private static final Dimension SCREEN_DIMENSION = Toolkit.getDefaultToolkit().getScreenSize();
+	
 	private JPanel pnPanel0;
 	private JButton btnNW;
 	private JButton btnN;
@@ -38,6 +43,11 @@ public class InteractiveCommand extends JDialog{
 	private JLabel lbCurrentPlayer;
 
 	private InteractivePlayer ip;
+	
+	private int dialogWidth = SCREEN_DIMENSION.width / 9; //example; a quarter of the screen size
+	private int dialogHeight = SCREEN_DIMENSION.height /9; //example
+	private int dialogX = SCREEN_DIMENSION.width / 2; //position right in the middle of the screen
+	private int dialogY = SCREEN_DIMENSION.height / 2;
 	
 	private Moves move;
 	/**
@@ -188,7 +198,7 @@ public class InteractiveCommand extends JDialog{
 		pnPanel0.add( lbCurrentPlayer );
 
 		setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
-		
+		setBounds(dialogX, dialogY, dialogWidth, dialogHeight);
 		setContentPane( pnPanel0 );
 		pack();
 		

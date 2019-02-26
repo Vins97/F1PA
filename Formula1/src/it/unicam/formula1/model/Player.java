@@ -17,7 +17,7 @@ public interface Player extends Comparable<Player> {
 	void setDistanceToRun(double d);
 	int getId();	
 	default String youFinish() {
-		return this.toString()+"Congrats! You finish";
+		return "Congratulazioni "+this.toString()+" Hai vinto";
 	};
 	default String youLoose() {
 		return this.toString()+"You have made a mistake you loose";
