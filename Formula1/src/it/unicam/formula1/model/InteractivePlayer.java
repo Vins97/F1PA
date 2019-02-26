@@ -12,7 +12,7 @@ import it.unicam.formula1.view.InteractiveCommand;
 public class InteractivePlayer implements Player {
 	private Car car;
 	private String name;
-	private int id;
+	private int id=1;
 	private double distToRun;
 	
 	public InteractivePlayer(CarType ct,String n,int id) {
@@ -33,9 +33,7 @@ public class InteractivePlayer implements Player {
 	public String toString() {
 		return this.name;
 	}
-	/* (non-Javadoc)
-	 * @see it.unicam.formula1.model.Player#getDistanceToRun()
-	 */
+
 	@Override
 	public Double getDistanceToRun() {		
 		return distToRun;

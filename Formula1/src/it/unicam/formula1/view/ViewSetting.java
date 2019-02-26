@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.util.stream.IntStream;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ import javax.swing.JTextField;
 
 import it.unicam.formula1.model.CarType;
 import it.unicam.formula1.model.ModelSetting;
+import it.unicam.formula1.model.TrackType;
 
 
 /**
@@ -37,19 +39,17 @@ public class ViewSetting extends JFrame {
 
 	private JComboBox<CarType> selectCar;
 	private JComboBox<Integer> cmbIdPlayer;
+	private JComboBox<TrackType> trackType;
 	private JTextField tfPlayerName;
 	private JButton enterButton;
-
 	
-	private JPanel pnPanel0;
-	
+	private JPanel pnPanel0;	
 	
 	private JButton startRace;
 	private JLabel lbLabel1;
 	private JLabel lbLabel2;
 	private JLabel lbLabel3;
 	private JLabel countPlayerToInsert;
-	private int numToInsert;
 	
 	private ModelSetting ms;
 	 
@@ -96,7 +96,7 @@ public class ViewSetting extends JFrame {
 		gbPanel0.setConstraints( cmbNumPlayer, gbcPanel0 );
 		pnPanel0.add( cmbNumPlayer );
 		
-		countPlayerToInsert = new JLabel( "0" );
+		countPlayerToInsert = new JLabel( "" + ms.getNumPlayerToInsert());
 		gbcPanel0.gridx = 17;
 		gbcPanel0.gridy = 2;
 		gbcPanel0.gridwidth = 1;
@@ -183,10 +183,23 @@ public class ViewSetting extends JFrame {
 		gbPanel0.setConstraints( lbLabel3, gbcPanel0 );
 		pnPanel0.add( lbLabel3 );
 		
+		trackType = new JComboBox<>();
+		trackType.setModel(new DefaultComboBoxModel<TrackType>(TrackType.values()));
+		trackType.setSelectedIndex(0);
+		gbcPanel0.gridx = 5;
+		gbcPanel0.gridy = 10;
+		gbcPanel0.gridwidth = 1;
+		gbcPanel0.gridheight = 1;
+		gbcPanel0.fill = GridBagConstraints.BOTH;
+		gbcPanel0.weightx = 1;
+		gbcPanel0.weighty = 0;
+		gbcPanel0.anchor = GridBagConstraints.NORTH;
+		gbPanel0.setConstraints( trackType, gbcPanel0 );
+		pnPanel0.add( trackType );
 		
 		startRace = new JButton( "Inizia Corsa"  );
 		gbcPanel0.gridx = 5;
-		gbcPanel0.gridy = 10;
+		gbcPanel0.gridy = 15;
 		gbcPanel0.gridwidth = 1;
 		gbcPanel0.gridheight = 1;
 		gbcPanel0.fill = GridBagConstraints.BOTH;
@@ -213,14 +226,22 @@ public class ViewSetting extends JFrame {
 	public void addActionListenerStartRace(ActionListener a) {
 		startRace.addActionListener(a);
 	}
+	public void addActionListenerSelectTrack(ActionListener a) {
+		trackType.addActionListener(a);
+	}
 	
 	public JComboBox<Integer> getCmbNumPlayer() {
-		return cmbNumPlayer;
+		return this.cmbNumPlayer;
 	}
 	
 	public JComboBox<CarType> getSelectCar() {
-		return selectCar;
+		return this.selectCar;
 	}
+	
+	public JComboBox<TrackType> getSelectTrack() {
+		return this.trackType;
+	}
+	
 	
 	public JComboBox<Integer> getCmbIdPlayer() {
 		return cmbIdPlayer;
@@ -240,6 +261,7 @@ public class ViewSetting extends JFrame {
 		return enterButton;
 	}
 	private JComboBox<Integer> cmbNumPlayer;
+	
 	
 	
 

@@ -3,16 +3,13 @@
  */
 package it.unicam.formula1.view;
 
-
-
-
-import java.util.List;
-
 import javax.swing.JFrame;
 
 
 import it.unicam.formula1.controller.Control;
-import it.unicam.formula1.model.InteractivePlayer;
+
+import it.unicam.formula1.model.ModelSetting;
+import it.unicam.formula1.model.PathGeneratorFromTxtCsv;
 import it.unicam.formula1.model.Race;
 
 /**
@@ -29,13 +26,15 @@ public class MainPanel extends JFrame{
 	private Control control;
 	
 	
-	public MainPanel(List<InteractivePlayer> interactivePlayer){  
-		this.race = new Race(interactivePlayer);
+	public MainPanel(ModelSetting settings){  
+		if(settings.getTrackpath().equalsIgnoreCase("DEFAULT"))
+			this.race = new Race(settings.getP());
+		else
+			this.race = new Race(settings.getP(),new PathGeneratorFromTxtCsv(settings.getTrackpath()).getPath());
 		this.view = new View(race);
 		this.control = new Control(race, view);
-		startRace();
+		startRace();		
 	}
-
 	public void startRace() {
 		this.race.mainGameLoop();
 	}

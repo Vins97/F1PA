@@ -23,9 +23,9 @@ public class Asphalt extends Point{
 		this.carOccuper=c;
 		this.checkPointID=-1;
 	}
-	//set car in the piece of asphalt 
+	//assegna l'oggetto macchina al pezzo di asfalto se e' disponibile 
 	public boolean setCar(Car c) {
-		if(this.isEmpty()) {
+		if(isEmpty()) {
 			this.carOccuper=c;
 			return true;
 		}
@@ -41,24 +41,26 @@ public class Asphalt extends Point{
 	public void setEmpty() {
 		this.carOccuper=null;
 	}
-	//check if the asphalt piece is free
+	//controlla se l'asfalto e' vuoto
 	public boolean isEmpty() {
 		return this.carOccuper==null;
 	}	
-	//to use the default contains and containsall arraylist method whith a correct implementation
+	//per usare containsAll e contains confrontando le coordinate
 	@Override
 	public boolean equals(Object o) {
-		if(o instanceof Point) {
+		if(o instanceof Asphalt) {
+			Asphalt asp = (Asphalt)o;
+			return ((getX()==asp.getX())&&(getY()==asp.getY())&&(this.isStartPoint()==asp.isStartPoint())&&(getId()==asp.getId()));
+		}
+		else if(o instanceof Point) {
 			Point piece = (Point)o;
-			return (this.getX()==piece.getX())&&(this.getY()==piece.getY());
-		
+			return (getX()==piece.getX())&&(getY()==piece.getY());
 		}
 		return false;
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return "["+this.getX()+","+this.getY()+"]"+" Car:"+this.carOccuper ;
+		return "["+this.getX()+","+this.getY()+"]"+" Car:"+this.carOccuper+", Start: "+isStartPoint()+", CheckID"+getId();
 	} 
 	
 	public int getId() {

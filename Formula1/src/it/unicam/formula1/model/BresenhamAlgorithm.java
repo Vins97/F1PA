@@ -19,9 +19,9 @@ public class BresenhamAlgorithm {
 	 * @param p2
 	 * @return
 	 */
-	public static ArrayList<Asphalt> findLine(Point p1,Point p2){
+	public static ArrayList<Point> findLine(Point p1,Point p2){
 		
-		ArrayList<Asphalt> line = new ArrayList<>();
+		ArrayList<Point> line = new ArrayList<>();
 		
 		int dx = Math.abs(p2.x - p1.x);
         int dy = Math.abs(p2.y - p1.y);
@@ -33,7 +33,7 @@ public class BresenhamAlgorithm {
         int e2;
  
         while (true) {
-            line.add(new Asphalt(p1.x,p1.y));
+            line.add(new Point(p1.x,p1.y));
  
             if (p1.x == p2.x && p1.y == p2.y) 
                 break;

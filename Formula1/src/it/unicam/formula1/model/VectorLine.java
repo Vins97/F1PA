@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class VectorLine {
 	private ArrayList<Point> line;
 	private int id;
-	
+
 	public VectorLine(Point p1,Point p2,int id) {
 		this.line = new ArrayList<>(BresenhamAlgorithm.findLine(p1, p2));
 		this.id = id;
@@ -22,7 +22,13 @@ public class VectorLine {
 		this.line = new ArrayList<>(line);
 		this.id = id;
 	}
-
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public ArrayList<Point> getLine() {
 		return line;
 	}

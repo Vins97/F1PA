@@ -41,7 +41,6 @@ class RaceTest {
 		listInteractive.add(new InteractivePlayer(CarType.FERRARI, "nome2", 66));
 		
 		Race r = new Race(listInteractive);
-		r.addInteractivePlayer();
 		Player[] p = r.getRacer();
 		for(Player p1: p) System.out.println(p1);	
 	}

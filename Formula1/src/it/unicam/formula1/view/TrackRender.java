@@ -18,13 +18,13 @@ import it.unicam.formula1.model.Track;
  *
  */
 public class TrackRender extends JPanel{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 779796061997824537L;
-	private static final int MULTIPLICATION_FACTOR = 10;
-	private static final int GRIDDIMENSIONX = 120;
-	private static final int GRIDDIMENSIONY = 65;
+
+	private static final long serialVersionUID = -7370831895405750199L;
+	
+	private final int MULTIPLICATION_FACTOR = 10;
+	private final int DIM_FIXED=7;
+	private final int GRIDDIMENSIONX = 24*DIM_FIXED;
+	private final int GRIDDIMENSIONY = 13*DIM_FIXED;
 	private Track t;
 	TrackRender(Track t){
 		this.t= t;

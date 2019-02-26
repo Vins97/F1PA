@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -49,10 +50,16 @@ class TrackTest {
 	 * Test method for {@link it.unicam.formula1.model.Track#getStrGrid()}.
 	 */
 	@Test
-	void testGetStrGrid() throws DataInputException{
+	void testStartingGrid() throws DataInputException{
 		Track trDf= new Track();
-		assertFalse(trDf.getStrGrid().isEmpty());
+		assertFalse(trDf.getStartingGrid(trDf.getTrack()).isEmpty());
 	}
+	@Test
+	void testCheckPoints() throws DataInputException{
+		Track trDf= new Track();
+		assertFalse(trDf.getCheckPoint(trDf.getTrack()).isEmpty());
+		assertFalse(trDf.getCheckPoint(trDf.getTrack()).isEmpty());
+	} 
 	
 	@Test
 	void testIsAsphaltOnTrack() throws DataInputException{
@@ -70,15 +77,15 @@ class TrackTest {
 		assertTrue(trDf.setCarOnTrack(new Car(CarType.FERRARI,5), 0,1));
 		
 	}
-	@Test
-	void testNumberOfCar() throws DataInputException{
-		Track trDf = new Track();
-		Car c1= new Car(CarType.FERRARI,5);
-		trDf.setCarOnTrack(c1,0,1);
-		Car c2= new Car(CarType.MCLAREN,14);
-		trDf.setCarOnTrack(c2, 0, 2);
-		assertTrue(2==trDf.numCarOnCircuit());				
-	}
+//	@Test
+//	void testNumberOfCar() throws DataInputException{
+//		Track trDf = new Track();
+//		Car c1= new Car(CarType.FERRARI,5);
+//		trDf.setCarOnTrack(c1,0,1);
+//		Car c2= new Car(CarType.MCLAREN,14);
+//		trDf.setCarOnTrack(c2, 0, 2);
+//		assertTrue(2==trDf.numCarOnCircuit());				
+//	}
 	@Test
 	void printCarOnTrack() throws DataInputException {
 		Track trDf = new Track();
@@ -104,30 +111,57 @@ class TrackTest {
 		trDf.setCarOnTrack(c1,0,1);
 		Car c2= new Car(CarType.MCLAREN,14);
 		trDf.setCarOnTrack(c2, 0, 2);
-		trDf.printAsphaltList(trDf.getCarsPosition());
+		//trDf.printAsphaltList(trDf.getCarsPosition());
 		trDf.moveCar(c1, Moves.E);
 		trDf.moveCar(c1, Moves.E);
 		trDf.moveCar(c1, Moves.N);
 		trDf.moveCar(c1, Moves.E);
-		System.out.println(trDf.getAsphalt(c1));	
+		//System.out.println(trDf.getAsphalt(c1));	
 		
 	}
 	@Test
-	void testGetTotalDistanceToRun() throws DataInputException{
-		Track trDf = new Track();
-		Car c1= new Car(CarType.FERRARI,5);
-		trDf.setCarOnTrack(c1,0,1);
-		System.out.println(""+trDf.getTotalDistanceToRun(c1));
-		trDf.moveCar(c1, Moves.E);
-		trDf.moveCar(c1, Moves.E);
-		trDf.moveCar(c1, Moves.E);
-		trDf.moveCar(c1, Moves.E);
-		trDf.moveCar(c1, Moves.E);
-		trDf.moveCar(c1, Moves.E);
-		trDf.moveCar(c1, Moves.E);
-		System.out.println(trDf.getAsphalt(c1));	
-		System.out.println(""+trDf.getTotalDistanceToRun(c1));
+	void checkLinesTest() throws DataInputException {
+		Track n = new Track();
+		assertFalse(n.getCheckPoint(n.getTrack()).isEmpty());
 	}
+	@Test
+	void unifyTrackElement() throws DataInputException {
+		List<Asphalt> trackTest = new ArrayList<>();
+		trackTest.add(new Asphalt(1, 1));
+		trackTest.add(new Asphalt(1, 2));
+		trackTest.add(new Asphalt(1, 3));
+		trackTest.add(new Asphalt(1, 4));
+		trackTest.add(new Asphalt(1, 5));
+		trackTest.add(new Asphalt(1, 6));
+		Asphalt a = new Asphalt(1,6);
+		a.setStartPoint();
+		trackTest.add(a);
+		Asphalt b = new Asphalt(1,5);
+		b.setStartPoint();
+		trackTest.add(b);
+		Asphalt c1 = new Asphalt(1,4);
+		c1.setId(0);
+		trackTest.add(c1);
+		//trackTest.forEach(System.out::println);
+		Track n = new Track(trackTest);
+		//n.printAsphaltList(n.getTrack());
+	}
+//	@Test
+//	void testGetTotalDistanceToRun() throws DataInputException{
+//		Track trDf = new Track();
+//		Car c1= new Car(CarType.FERRARI,5);
+//		trDf.setCarOnTrack(c1,0,1);
+//		System.out.println(""+trDf.getTotalDistanceToRun(c1));
+//		trDf.moveCar(c1, Moves.E);
+//		trDf.moveCar(c1, Moves.E);
+//		trDf.moveCar(c1, Moves.E);
+//		trDf.moveCar(c1, Moves.E);
+//		trDf.moveCar(c1, Moves.E);
+//		trDf.moveCar(c1, Moves.E);
+//		trDf.moveCar(c1, Moves.E);
+//		System.out.println(trDf.getAsphalt(c1));	
+//		System.out.println(""+trDf.getTotalDistanceToRun(c1));
+//	}
 
 	
 

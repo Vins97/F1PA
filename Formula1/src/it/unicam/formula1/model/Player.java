@@ -20,6 +20,6 @@ public interface Player extends Comparable<Player> {
 		return this.toString()+"Congrats! You finish";
 	};
 	default String youLoose() {
-		return this.toString()+"You have made a mistake. Start a new race!";
+		return this.toString()+"You have made a mistake you loose";
 	};
 }

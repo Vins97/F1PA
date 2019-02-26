@@ -13,7 +13,7 @@ public class RandomPlayer implements Player {
 	private String name;
 	private int id;
 	private double distToRun;
-	private boolean isInGame=true;
+	
 	public RandomPlayer(CarType ct,String n,int id) {
 		this.car= new Car(ct,id);
 		this.name="Player"+id;
@@ -53,9 +53,6 @@ public class RandomPlayer implements Player {
 	        else return 0;	
 	}
 
-	/* (non-Javadoc)
-	 * @see it.unicam.formula1.model.Player#getId()
-	 */
 	@Override
 	public int getId() {
 		return this.id;
@@ -63,11 +60,11 @@ public class RandomPlayer implements Player {
 
 	@Override
 	public void setIsInGame(boolean s) {
-		this.isInGame=s;		
+		this.car.setOnTrack(s);		
 	}
 
 	@Override
 	public boolean getIsInGame() {
-		return isInGame;
+		return this.car.isOnTrack();
 	}
 }

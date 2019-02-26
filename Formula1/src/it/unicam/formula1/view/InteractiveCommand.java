@@ -2,7 +2,7 @@
  * 
  */
 package it.unicam.formula1.view;
-import javax.swing.JFrame;
+
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import java.awt.GridBagConstraints;
@@ -45,6 +45,7 @@ public class InteractiveCommand extends JDialog{
 	 */
 	public InteractiveCommand(InteractivePlayer ip) {
 		this.ip=ip;
+		
 		setModal(true);
 		generateElements();
 		addActionListener(new MoveListener());
