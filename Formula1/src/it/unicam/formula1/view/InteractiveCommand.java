@@ -63,7 +63,7 @@ public class InteractiveCommand extends JDialog{
 	}
 	private void generateElements() {
 		pnPanel0 = new JPanel();
-		pnPanel0.setBorder( BorderFactory.createTitledBorder( "Enter Command" ) );
+		pnPanel0.setBorder( BorderFactory.createTitledBorder( "Inerzia ["+ip.getCar().getInertia().x +","+ip.getCar().getInertia().y+"]") );
 		GridBagLayout gbPanel0 = new GridBagLayout();
 		GridBagConstraints gbcPanel0 = new GridBagConstraints();
 		pnPanel0.setLayout( gbPanel0 );
@@ -108,7 +108,7 @@ public class InteractiveCommand extends JDialog{
 		pnPanel0.add( btnNE );
 
 		btnW = new JButton( "W"  );
-		btnW.setActionCommand( "EW" );
+		btnW.setActionCommand( "W" );
 		gbcPanel0.gridx = 2;
 		gbcPanel0.gridy = 7;
 		gbcPanel0.gridwidth = 3;

@@ -6,9 +6,6 @@ package it.unicam.formula1;
 import java.awt.EventQueue;
 
 
-import it.unicam.formula1.view.SettingPanel;
-
-
 /**
  * @author Vincenzo Chiarella 30 gen 2019
  *

@@ -22,6 +22,7 @@ public class View extends JFrame{
 	public View(Race r){
 		super();
 		this.race=r;
+		setIconImage(getIconImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setSize(1920,1080);
 		setTitle("F1 Game Unicam PA");			
@@ -34,7 +35,7 @@ public class View extends JFrame{
 	
 	public void updateView() {
 		//aggiungendo altri elementi nella stessa posizione quelli precedenti vengono sovrascritti
-		add(new TrackRender(race.getTrackChoosen()),BorderLayout.CENTER);
+		add(new ViewTrackRender(race.getTrackChoosen()),BorderLayout.CENTER);
 		
  
 //		DefaultListModel<String> dlm = new DefaultListModel<>();

@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import it.unicam.formula1.SettingPanel;
 import it.unicam.formula1.model.CarType;
 import it.unicam.formula1.model.InteractivePlayer;
-import it.unicam.formula1.view.SettingPanel;
 
 
 

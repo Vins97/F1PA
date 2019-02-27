@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 
-import jdk.nashorn.internal.runtime.regexp.joni.exception.JOniException;
-
 
 
 
@@ -87,7 +85,7 @@ public class Race {
 			return !c;
 		}
 		if(allPlayerOut()) {
-			JOptionPane.showMessageDialog(null, "Fai ripartire una gara","Nessuno ha vinto",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Fai ripartire una gara","Non ha vinto nessuno",JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
 		changePlayer();

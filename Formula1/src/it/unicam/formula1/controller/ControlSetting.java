@@ -4,10 +4,10 @@ package it.unicam.formula1.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import it.unicam.formula1.MainPanel;
 import it.unicam.formula1.model.CarType;
 import it.unicam.formula1.model.ModelSetting;
 import it.unicam.formula1.model.TrackType;
-import it.unicam.formula1.view.MainPanel;
 import it.unicam.formula1.view.ViewSetting;
 
 /**
@@ -29,6 +29,7 @@ public class ControlSetting {
 		vs.addActionListenerPlayer(new AddNewPlayer());
 		vs.addActionListenerStartRace(new StartRace());
 		vs.addActionListenerSelectTrack(new SelectTrack());
+		vs.setVisibilityInsertNumberOfPlayer();
 	}
 	private class NumPlayerListener implements ActionListener{
 		@Override
@@ -36,25 +37,28 @@ public class ControlSetting {
 			int n = (int) vs.getCmbNumPlayer().getSelectedItem();
 			ms.setnPlayer(n);
 			vs.setNewCounter(ms.getNumPlayerToInsert());
+			vs.setVisibilityAddInteractivePlayer();		
 		}
 		
 	}
 	private class AddNewPlayer implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			
+		public void actionPerformed(ActionEvent e) {			
 			CarType c = (CarType) vs.getSelectCar().getSelectedItem();
 			String name = vs.getTfPlayerName().getText();		
 			int i = (int) vs.getCmbIdPlayer().getSelectedItem();		
-			ms.addNewPlayer(c, name, i);
-			vs.setNewCounter(ms.getNumPlayerToInsert());
+			if(ms.addNewPlayer(c, name, i))
+				vs.setNewCounter(ms.getNumPlayerToInsert());
+			else 
+				vs.setVisibilityChooseRaceAndStart();			
 			}
 		
 	}
 	private class SelectTrack implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {			
-			ms.setTrackpath(((TrackType) vs.getSelectTrack().getSelectedItem()).getUrl());			
+			ms.setTrackpath(((TrackType) vs.getSelectTrack().getSelectedItem()).getUrl());
+			
 		}
 		
 	}

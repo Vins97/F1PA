@@ -234,6 +234,35 @@ public class ViewSetting extends JFrame {
 		trackType.addActionListener(a);
 	}
 	
+	public void setVisibilityInsertNumberOfPlayer() {
+		this.countPlayerToInsert.setVisible(false);		
+		setVisibilityPlayerData(false);		
+		this.trackType.setVisible(false);		
+		this.startRace.setVisible(false);
+	}
+	
+	public void setVisibilityPlayerData(boolean t) {
+		this.countPlayerToInsert.setVisible(t);
+		
+		this.selectCar.setVisible(t);
+		this.lbLabel1.setVisible(t);
+		this.tfPlayerName.setVisible(t);
+		this.lbLabel2.setVisible(t);
+		this.cmbIdPlayer.setVisible(t);
+		this.lbLabel3.setVisible(t);
+		this.enterButton.setVisible(t);
+	}
+	public void setVisibilityAddInteractivePlayer() {
+		this.cmbNumPlayer.setVisible(false);
+		setVisibilityPlayerData(true);
+	}
+	public void setVisibilityChooseRaceAndStart() {
+		setVisibilityPlayerData(false);
+		this.trackType.setVisible(true);
+		this.startRace.setVisible(true);
+	}
+
+	
 	public JComboBox<Integer> getCmbNumPlayer() {
 		return this.cmbNumPlayer;
 	}

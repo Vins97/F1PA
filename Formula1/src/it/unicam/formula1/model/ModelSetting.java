@@ -29,11 +29,14 @@ public class ModelSetting {
 	public List<InteractivePlayer> getP() {
 		return p;
 	}
-	public void addNewPlayer(CarType c, String nome, int id) {
+	public boolean addNewPlayer(CarType c, String nome, int id) {
 		//eventuali giocatori aggiunti oltre nPlayer non vengono aggiunti
-		if(count<=nPlayer)
+		if(count<=nPlayer) {
 			this.p.add(new InteractivePlayer(c,nome,id));
-		count++;
+			count++;
+			return (count==nPlayer) ? false : true;
+		}
+		return false;
 	}
 	public int getNumPlayerToInsert(){
 		return nPlayer-count;

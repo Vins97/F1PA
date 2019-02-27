@@ -116,12 +116,12 @@ public class Track {
 //	}
 	
 	//restituisce gli oggetti asphalt che contengono una macchina
-	public ArrayList<Asphalt> getCarsPosition(){
-		ArrayList<Asphalt> position = new ArrayList<>();
+	public List<Asphalt> getCarsPosition(){
+		List<Asphalt> position = new ArrayList<>();
 		position = trk
 				.stream()
 				.filter( asph -> asph.isEmpty()!= true)
-				.collect(Collectors.toCollection(ArrayList::new));
+				.collect(Collectors.toList());
 		return position;
 	}
 	
@@ -129,8 +129,9 @@ public class Track {
 	//sposta una macchina da una posizione all'altra
 	public void moveCar(Car c,Moves choosenMove) {
 		c.makeAcceleration(choosenMove);		
-			Asphalt actual = getAsphalt(c);
-		if(!isAsphaltOnTrack(actual)) {
+		
+		Asphalt actual = getAsphalt(c);
+		if(!isAsphaltOnTrack(actual)||actual==null) {
 			c.setOnTrack(false);
 			return;
 		}
@@ -141,18 +142,17 @@ public class Track {
 			if(!checkLines(vector)) {
 				next.setEmpty();
 				c.setOnTrack(false);
+				return;
 			}				
 			Vector<Integer> ids = this.matchCheckPoint(vector);
 			for(Integer i:ids) { 
 				c.addCheckPassed(i);
 			}
 		if(next.setCar(c)) {}
-		else{	
-			c.setOnTrack(false);			
-			}		
+		else
+			c.setOnTrack(false);				
 		}
-		actual.setEmpty();
-		
+		actual.setEmpty();		
 	}
 	
 //	public double getDistance(Point p1,Point p2) {

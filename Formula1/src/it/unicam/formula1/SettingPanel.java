@@ -1,11 +1,12 @@
 /**
  * 
  */
-package it.unicam.formula1.view;
+package it.unicam.formula1;
 
 import it.unicam.formula1.controller.ControlSetting;
 
 import it.unicam.formula1.model.ModelSetting;
+import it.unicam.formula1.view.ViewSetting;
 
 
 /**

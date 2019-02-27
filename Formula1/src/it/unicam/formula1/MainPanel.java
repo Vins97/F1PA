@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.unicam.formula1.view;
+package it.unicam.formula1;
 
 import javax.swing.JFrame;
 
@@ -11,6 +11,7 @@ import it.unicam.formula1.controller.Control;
 import it.unicam.formula1.model.ModelSetting;
 import it.unicam.formula1.model.PathGeneratorFromTxtCsv;
 import it.unicam.formula1.model.Race;
+import it.unicam.formula1.view.View;
 
 /**
  * @author Vincenzo Chiarella 12 feb 2019
