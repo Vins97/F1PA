@@ -10,7 +10,8 @@ package it.unicam.formula1.model;
  *
  */
 public enum TrackType {
-	Strange("Strange.txt");
+	Strange("Strange.txt"),
+	Ambiguous("Ambiguous.txt");
 	
 	private String fileName;
 	TrackType(String filename){		

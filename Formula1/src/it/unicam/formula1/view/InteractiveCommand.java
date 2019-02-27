@@ -5,6 +5,7 @@ package it.unicam.formula1.view;
 
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -55,7 +56,7 @@ public class InteractiveCommand extends JDialog{
 	 */
 	public InteractiveCommand(InteractivePlayer ip) {
 		this.ip=ip;
-		
+		setIconImage(new ImageIcon(getClass().getResource("Formula1Icon.png").getPath()).getImage());
 		setModal(true);
 		generateElements();
 		addActionListener(new MoveListener());
