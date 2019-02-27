@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.stream.IntStream;
 
 import javax.swing.DefaultComboBoxModel;
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -61,7 +61,7 @@ public class ViewSetting extends JFrame {
 	public ViewSetting(ModelSetting ms) {
 		this.ms = ms;
 		this.setSize(500,500);
-		
+		setIconImage(new ImageIcon(getClass().getResource("SettingIcon.png").getPath()).getImage());	
 		generateElement();
 	}
 

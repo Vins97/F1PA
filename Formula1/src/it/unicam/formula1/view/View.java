@@ -5,8 +5,7 @@ package it.unicam.formula1.view;
 
 import java.awt.BorderLayout;
 
-
-
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import it.unicam.formula1.model.Race;
@@ -22,7 +21,7 @@ public class View extends JFrame{
 	public View(Race r){
 		super();
 		this.race=r;
-		setIconImage(getIconImage());
+		setIconImage(new ImageIcon(getClass().getResource("Formula1Icon.png").getPath()).getImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setSize(1920,1080);
 		setTitle("F1 Game Unicam PA");			
